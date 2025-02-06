@@ -1,0 +1,84 @@
+[12-Jan-2024 09:25:34 UTC] PHP Warning:  require(/home/tifpsdku/layanan.tifpsdku.com/../ci4_core/app/Config/Paths.php): Failed to open stream: No such file or directory in /home/tifpsdku/layanan.tifpsdku.com/index.php on line 32
+[12-Jan-2024 09:25:34 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tifpsdku/layanan.tifpsdku.com/../ci4_core/app/Config/Paths.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/tifpsdku/layanan.tifpsdku.com/index.php:32
+Stack trace:
+#0 {main}
+  thrown in /home/tifpsdku/layanan.tifpsdku.com/index.php on line 32
+[12-Jan-2024 10:35:27 UTC] PHP Warning:  require(/home/tifpsdku/layanan.tifpsdku.com/../ci4_core/app/Config/Paths.php): Failed to open stream: No such file or directory in /home/tifpsdku/layanan.tifpsdku.com/index.php on line 32
+[12-Jan-2024 10:35:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tifpsdku/layanan.tifpsdku.com/../ci4_core/app/Config/Paths.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/tifpsdku/layanan.tifpsdku.com/index.php:32
+Stack trace:
+#0 {main}
+  thrown in /home/tifpsdku/layanan.tifpsdku.com/index.php on line 32
+[12-Jan-2024 12:26:54 UTC] PHP Warning:  require(/home/tifpsdku/layanan.tifpsdku.com/public_html/ci4_core/app/Config/Paths.php): Failed to open stream: No such file or directory in /home/tifpsdku/layanan.tifpsdku.com/public_html/index.php on line 32
+[12-Jan-2024 12:26:54 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tifpsdku/layanan.tifpsdku.com/public_html/ci4_core/app/Config/Paths.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/tifpsdku/layanan.tifpsdku.com/public_html/index.php:32
+Stack trace:
+#0 {main}
+  thrown in /home/tifpsdku/layanan.tifpsdku.com/public_html/index.php on line 32
+[15-Jan-2024 03:08:30 UTC] PHP Fatal error:  Uncaught TypeError: CodeIgniter\HTTP\IncomingRequest::determineHost(): Return value must be of type string, null returned in /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/HTTP/IncomingRequest.php:497
+Stack trace:
+#0 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/HTTP/IncomingRequest.php(465): CodeIgniter\HTTP\IncomingRequest->determineHost()
+#1 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/HTTP/IncomingRequest.php(232): CodeIgniter\HTTP\IncomingRequest->setPath()
+#2 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/HTTP/IncomingRequest.php(178): CodeIgniter\HTTP\IncomingRequest->detectURI()
+#3 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/Services.php(545): CodeIgniter\HTTP\IncomingRequest->__construct()
+#4 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/Services.php(501): CodeIgniter\Config\Services::incomingrequest()
+#5 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(252): CodeIgniter\Config\Services::request()
+#6 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic()
+#7 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/Services.php(497): CodeIgniter\Config\BaseService::getSharedInstance()
+#8 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(252): CodeIgniter\Config\Services::request()
+#9 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/Services.php(265): CodeIgniter\Config\BaseService::__callStatic()
+#10 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(252): CodeIgniter\Config\Services::exceptions()
+#11 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic()
+#12 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/Services.php(261): CodeIgniter\Config\BaseService::getSharedInstance()
+#13 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(252): CodeIgniter\Config\Services::exceptions()
+#14 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/CodeIgniter.php(186): CodeIgniter\Config\BaseService::__callStatic()
+#15 /home/tifpsdku/layanan.tifpsdku.com/public_html/index.php(55): CodeIgniter\CodeIgniter->initialize()
+#16 {main}
+  thrown in /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/HTTP/IncomingRequest.php on line 497
+[15-Jan-2024 03:37:36 UTC] PHP Fatal error:  Uncaught TypeError: CodeIgniter\HTTP\IncomingRequest::determineHost(): Return value must be of type string, null returned in /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/HTTP/IncomingRequest.php:497
+Stack trace:
+#0 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/HTTP/IncomingRequest.php(465): CodeIgniter\HTTP\IncomingRequest->determineHost()
+#1 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/HTTP/IncomingRequest.php(232): CodeIgniter\HTTP\IncomingRequest->setPath()
+#2 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/HTTP/IncomingRequest.php(178): CodeIgniter\HTTP\IncomingRequest->detectURI()
+#3 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/Services.php(545): CodeIgniter\HTTP\IncomingRequest->__construct()
+#4 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/Services.php(501): CodeIgniter\Config\Services::incomingrequest()
+#5 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(252): CodeIgniter\Config\Services::request()
+#6 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic()
+#7 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/Services.php(497): CodeIgniter\Config\BaseService::getSharedInstance()
+#8 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(252): CodeIgniter\Config\Services::request()
+#9 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/Services.php(265): CodeIgniter\Config\BaseService::__callStatic()
+#10 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(252): CodeIgniter\Config\Services::exceptions()
+#11 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic()
+#12 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/Services.php(261): CodeIgniter\Config\BaseService::getSharedInstance()
+#13 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(252): CodeIgniter\Config\Services::exceptions()
+#14 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/CodeIgniter.php(186): CodeIgniter\Config\BaseService::__callStatic()
+#15 /home/tifpsdku/layanan.tifpsdku.com/public_html/index.php(55): CodeIgniter\CodeIgniter->initialize()
+#16 {main}
+  thrown in /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/HTTP/IncomingRequest.php on line 497
+[15-Jan-2024 03:51:47 UTC] PHP Warning:  require(/home/tifpsdku/layanan.tifpsdku.com/public_html/../app/Config/Paths.php): Failed to open stream: No such file or directory in /home/tifpsdku/layanan.tifpsdku.com/public_html/index.php on line 32
+[15-Jan-2024 03:51:47 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tifpsdku/layanan.tifpsdku.com/public_html/../app/Config/Paths.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/tifpsdku/layanan.tifpsdku.com/public_html/index.php:32
+Stack trace:
+#0 {main}
+  thrown in /home/tifpsdku/layanan.tifpsdku.com/public_html/index.php on line 32
+[15-Jan-2024 03:55:35 UTC] PHP Warning:  require(/home/tifpsdku/layanan.tifpsdku.com/public_html/../ci4_core/app/Config/Paths.php): Failed to open stream: No such file or directory in /home/tifpsdku/layanan.tifpsdku.com/public_html/index.php on line 32
+[15-Jan-2024 03:55:35 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tifpsdku/layanan.tifpsdku.com/public_html/../ci4_core/app/Config/Paths.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/tifpsdku/layanan.tifpsdku.com/public_html/index.php:32
+Stack trace:
+#0 {main}
+  thrown in /home/tifpsdku/layanan.tifpsdku.com/public_html/index.php on line 32
+[15-Jan-2024 05:20:17 UTC] PHP Warning:  Undefined property: Config\App::$baseURL in /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/HTTP/IncomingRequest.php on line 178
+[15-Jan-2024 05:20:17 UTC] PHP Fatal error:  Uncaught TypeError: CodeIgniter\HTTP\IncomingRequest::detectURI(): Argument #2 ($baseURL) must be of type string, null given, called in /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/HTTP/IncomingRequest.php on line 178 and defined in /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/HTTP/IncomingRequest.php:230
+Stack trace:
+#0 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/HTTP/IncomingRequest.php(178): CodeIgniter\HTTP\IncomingRequest->detectURI()
+#1 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/Services.php(545): CodeIgniter\HTTP\IncomingRequest->__construct()
+#2 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/Services.php(501): CodeIgniter\Config\Services::incomingrequest()
+#3 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(252): CodeIgniter\Config\Services::request()
+#4 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic()
+#5 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/Services.php(497): CodeIgniter\Config\BaseService::getSharedInstance()
+#6 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(252): CodeIgniter\Config\Services::request()
+#7 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/Services.php(265): CodeIgniter\Config\BaseService::__callStatic()
+#8 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(252): CodeIgniter\Config\Services::exceptions()
+#9 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic()
+#10 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/Services.php(261): CodeIgniter\Config\BaseService::getSharedInstance()
+#11 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/Config/BaseService.php(252): CodeIgniter\Config\Services::exceptions()
+#12 /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/CodeIgniter.php(186): CodeIgniter\Config\BaseService::__callStatic()
+#13 /home/tifpsdku/layanan.tifpsdku.com/public_html/index.php(55): CodeIgniter\CodeIgniter->initialize()
+#14 {main}
+  thrown in /home/tifpsdku/layanan.tifpsdku.com/ci4_core/vendor/codeigniter4/framework/system/HTTP/IncomingRequest.php on line 230
