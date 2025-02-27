@@ -48,6 +48,7 @@ $routes->get('tips_karir_detail/(:any)', 'LandingController::tips_karir_detail/$
 $routes->get('agenda', 'LandingController::agenda');
 $routes->get('sipema_info', 'LandingController::sipema_info');
 $routes->get('tracer_info', 'LandingController::tracer_info');
+$routes->post('/register/buat', 'AuthController::store');
 
 // // Pengelolaan Data Mahasiswa
 // // Tampil Data
@@ -462,7 +463,7 @@ $routes->group('simlab/transaksi', ['filter' => 'login'], static function ($rout
     $routes->get('konfirmasi-pengajuan-peminjaman/ruang-laboratorium', 'Simlab\TransaksiPeminjamanController::dataPengajuanRuang');
     $routes->get('detail-peminjaman-alat-laboratorium/(:any)', 'Simlab\TransaksiPeminjamanController::detail_peminjaman_alat/$1');
     $routes->get('konfirmasi-pengajuan-peminjaman/alat-laboratorium/disetujui/(:any)', 'Simlab\TransaksiPeminjamanController::verif_disetujui_alat/$1');
-    $routes->get('konfirmasi-pengajuan-peminjaman/ruang-laboratorium/disetujui/(:any)', 'Simlab\TransaksiPeminjamanController::verif_disetujui_ruang/$1');
+    $routes->get('konfirmasi-pengajuan-peminjaman/ruang-laboratorium/disetujui/(:any)', 'Simlab\TransaksiPeminjamanController::verif_disetujui_ruang/$1'); //BUOSOKKK IKI API NE
     $routes->post('konfirmasi-pengajuan-peminjaman/alat-laboratorium/ditolak/(:any)', 'Simlab\TransaksiPeminjamanController::verif_ditolak_alat/$1');
     $routes->post('konfirmasi-pengajuan-peminjaman/ruang-laboratorium/ditolak/(:any)', 'Simlab\TransaksiPeminjamanController::verif_ditolak_ruang/$1');
     $routes->get('konfirmasi-pengembalian/alat-laboratorium', 'Simlab\TransaksiPeminjamanController::dataPeminjamanAlat');

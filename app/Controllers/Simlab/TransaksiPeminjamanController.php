@@ -17,7 +17,7 @@ use Myth\Auth\Models\GroupModel;
 
 class TransaksiPeminjamanController extends BaseController
 {
-
+    protected $alatlab;
     public function __construct()
     {
         $this->alatlab = new AlatLaboratoriumModel();

@@ -56,12 +56,12 @@ class JadwalRuangModel extends Model
         $builder->delete();
     }
 
-    public function cekKetersediaanRuangByJadwalPraktikum($id_ruang, $hari, $tahun_ajaran, $waktu_mulai, $waktu_selesai)
+    public function cekKetersediaanRuangByJadwalPraktikum($id_ruang, $hari, $waktu_mulai, $waktu_selesai)
     {
         $builder = $this->db->table('simlab_jadwal_ruang');
         $builder->where('id_ruang', $id_ruang);
         $builder->where('hari', $hari);
-        $builder->where('tahun_ajaran', $tahun_ajaran);
+        // $builder->where('tahun_ajaran', $tahun_ajaran);
         $builder->where('waktu_mulai <', $waktu_selesai);
         $builder->where('waktu_selesai >', $waktu_mulai);
         return $builder->countAllResults();

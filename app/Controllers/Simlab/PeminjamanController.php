@@ -54,7 +54,7 @@ class PeminjamanController extends BaseController
 
             $data = [
                 'title' => 'Pengajuan Peminjaman Alat Laboratorium',
-                'alatlab' => $this->alatlab->getAlatLabBaikStok(),
+                'alatlab' => $this->alat->getAlatLabBaikStok(),
                 'mahasiswa' => $this->mahasiswa->getMahasiswabyUserId(),
                 'validation' => $this->validation,
                 'activePage' => 'pengajuan-peminjaman/alat-laboratorium',
@@ -63,7 +63,7 @@ class PeminjamanController extends BaseController
         } else {
             $data = [
                 'title' => 'Pengajuan Peminjaman Alat Laboratorium',
-                'alatlab' => $this->alatlab->getAlatLabBaikStok(),
+                'alatlab' => $this->alat->getAlatLabBaikStok(),
                 'staf' => $this->staf->getStafbyUserId(),
                 'validation' => $this->validation,
                 'activePage' => 'pengajuan-peminjaman/alat-laboratorium',
@@ -82,72 +82,58 @@ class PeminjamanController extends BaseController
         $tanggal_pinjam = $this->request->getVar('tanggal_pinjam');
         $tglkembali = $this->request->getVar('tanggal_kembali');
         $makspinjam = strtotime($tanggal_pinjam) + (7 * 24 * 60 * 60);
+    
         if (strtotime($tglkembali) > $makspinjam) {
             return redirect()->back()->with('error', 'Maksimal waktu peminjaman adalah 7 hari!');
         }
+    
         $tanggal_kembali = round(strtotime($tglkembali) * 1000);
-
+    
         $rules = [
             'id_alat' => [
                 'label' => "Nama alat laboratorium",
                 'rules' => "required",
-                'errors' => [
-                    'required' => "{field} harus diisi",
-                ],
+                'errors' => ['required' => "{field} harus diisi"],
             ],
             'keperluan' => [
                 'label' => "Keperluan peminjaman",
                 'rules' => "required",
-                'errors' => [
-                    'required' => "{field} harus diisi",
-                ],
+                'errors' => ['required' => "{field} harus diisi"],
             ],
             'tanggal_pinjam' => [
                 'label' => "Tanggal peminjaman",
                 'rules' => "required",
-                'errors' => [
-                    'required' => "{field} harus diisi",
-                ],
+                'errors' => ['required' => "{field} harus diisi"],
             ],
             'tanggal_kembali' => [
                 'label' => "Tanggal pengembalian",
                 'rules' => "required",
-                'errors' => [
-                    'required' => "{field} harus diisi",
-                ],
+                'errors' => ['required' => "{field} harus diisi"],
             ],
         ];
-
+    
         if ($this->validate($rules)) {
-            // Membuat array untuk menyimpan pesan kesalahan ketersediaan alat
             $AlatTidakTersedia = [];
-
-            // Mengambil data alat yang diminta
-            $id_alat = $this->request->getVar('id_alat');
-            $jumlah_pinjam = $this->request->getVar('jumlah_pinjam');
-
-            // Memeriksa ketersediaan alat
+    
+            $id_alat = (array) $this->request->getVar('id_alat');
+            $jumlah_pinjam = (array) $this->request->getVar('jumlah_pinjam');
+    
             for ($i = 0; $i < count($id_alat); $i++) {
-                $alatlab = $this->alatlab->find($id_alat[$i]);
+                $alatlab = $this->alat->find($id_alat[$i]);
                 if ($alatlab) {
                     if ($alatlab->stok >= $jumlah_pinjam[$i]) {
-                        // Alat tersedia, lanjutkan
-                        $dataPinjam = [
+                        $dataDetailPinjam[] = [
                             'id_pinjam_alat' => $id_pinjam_alat,
                             'id_alat' => $id_alat[$i],
                             'jumlah_pinjam' => $jumlah_pinjam[$i],
                         ];
-                        $dataDetailPinjam[] = $dataPinjam;
-
                     } else {
-                        // Alat tidak cukup tersedia
                         $AlatTidakTersedia[] = $alatlab->nama_alat;
                     }
                 }
             }
-
+    
             if (empty($AlatTidakTersedia)) {
-                // Semua alat tersedia, lakukan insert data
                 $data = [
                     'id_pinjam_alat' => $id_pinjam_alat,
                     'id_mahasiswa' => $id_mahasiswa,
@@ -157,153 +143,35 @@ class PeminjamanController extends BaseController
                     'tanggal_pinjam' => $tanggal_pinjam,
                     'tanggal_kembali' => $tanggal_kembali,
                 ];
+    
                 $this->pinjamalat->insert($data);
                 $this->detailpinjamalat->insertBatch($dataDetailPinjam);
+    
+                session()->setFlashdata('success', 'Berhasil Mengirim Pengajuan Peminjaman Alat Laboratorium!');
+                return redirect()->to('simlab/peminjaman/data-peminjaman/alat-laboratorium')
+                    ->with('status_icon', 'success')
+                    ->with('status_text', 'Data Berhasil ditambah');
             } else {
-                // Ada alat yang tidak tersedia, berikan pesan kesalahan
                 return redirect()->back()->with('error', 'Alat tidak tersedia : ' . implode(', ', $AlatTidakTersedia));
             }
-            // $data = [
-            //     'id_pinjam_alat' => $uuid,
-            //     'id_mahasiswa' => $id_mahasiswa,
-            //     'id_staff' => $id_staff,
-            //     'keperluan' => $keperluan,
-            //     'tanggal_ajuan' => $tanggal_ajuan,
-            //     'tanggal_pinjam' => $tanggal_pinjam,
-            //     'tanggal_kembali' => $tanggal_kembali,
-            // ];
-
-            // $this->pinjamalat->insert($data);
-
-            // $dataDetailPinjam = [];
-            // $uuid1 = Uuid::uuid4();
-            // $id_detail_pinjam_alat = $uuid1->toString();
-            // $id_alat = $this->request->getVar('id_alat');
-            // $jumlah_pinjam = $this->request->getVar('jumlah_pinjam');
-            // $jumlah_alat = count((array) $this->request->getVar('id_alat'));
-
-            // for ($i = 0; $i < $jumlah_alat; $i++) {
-            //     $dataPinjam = array(
-            //         'id_detail_pinjam_alat' => $id_detail_pinjam_alat++,
-            //         'id_pinjam_alat' => $id_pinjam_alat,
-            //         'id_alat' => $id_alat[$i],
-            //         'jumlah_pinjam' => $jumlah_pinjam[$i],
-            //     );
-            //     $dataDetailPinjam[] = $dataPinjam;
-            // }
-
-            // $this->detailpinjamalat->insertBatch($dataDetailPinjam);
-
-            session()->setFlashdata('success', 'Berhasil Mengirim Pengajuan Peminjaman Alat Laboratorium!');
-
-            // Mengirim notifikasi kepada laboran
-            $url1 = 'http://localhost:8080/bot/api/publish';
-            $laboranRecipient = $this->staf->getLaboran(); // Mendapatkan daftar laboran yang akan menerima notifikasi
-
-            foreach ($laboranRecipient as $laboran) {
-                $recipient = $laboran->id_staf;
-                $pesan = 'Notifikasi : '
-                    . 'Terdapat ajuan peminjaman alat laboratorium. '
-                    . 'Mohon untuk melakukan konfirmasi permintaan peminjaman tersebut. '
-                    . 'Terima kasih';
-                $pesan_email = $this->request->getVar('pesan_email') ?? '';
-                $subject_email = $this->request->getVar('email_subject') ?? '';
-                $platform = ['telegram']; // Platform notifikasi yang ingin digunakan
-                $platformdata = array(
-                    'whatsapp' => false,
-                    'telegram' => in_array('telegram', $platform),
-                    'email' => in_array('email', $platform),
-                );
-                $datapesan = array(
-                    'receiver' => $recipient,
-                    'message' => $pesan,
-                    'email_subject' => ($subject_email !== '') ? $subject_email : 'default',
-                    'email_message' => ($pesan_email !== '') ? $pesan_email : 'default',
-                    'platform' => $platformdata,
-                );
-
-                $jsonData = json_encode($datapesan);
-
-                $request = Services::curlrequest();
-                $response = $request->setBody($jsonData)
-                    ->setHeader('Content-Type', 'application/json')
-                    ->setHeader('x-api-key', '12345678')
-                    ->setHeader('App-auth', 'simlabd3tipsdku001-1')
-                    ->post($url1);
-            }
-
-            $url2 = 'http://localhost:8080/bot/api/publishdelay';
-            $peminjam = $this->request->getVar('id_mahasiswa') ?? $this->request->getVar('id_staff');
-            $recipient = $peminjam;
-            $pesan = 'Mengingatkan, batas waktu peminjaman alat laboratorium adalah besok. Harap dikembalikan tepat waktu. Terima kasih.';
-            $pesan_email = $this->request->getVar('pesan_email') ?? '';
-            $subject_email = $this->request->getVar('email_subject') ?? '';
-            $platform = ['telegram'];
-
-            $platformdata = array(
-                'whatsapp' => false,
-                'telegram' => in_array('telegram', $platform),
-                'email' => in_array('email', $platform),
-            );
-
-            $tanggal = date('m/d/Y', strtotime('-1 day', $tanggal_kembali / 1000));
-            $jam = '13';
-            $menit = '30';
-
-            $parts = explode('/', $tanggal);
-            $bulan = intval($parts[0]);
-            $tanggal = intval($parts[1]);
-            $tahun = intval($parts[2]);
-
-            $timedata = array(
-                'year' => $tahun,
-                'month' => $bulan,
-                'day' => $tanggal,
-                'hour' => $jam,
-                'minute' => $menit,
-            );
-
-            $datapesan = array(
-                'receiver' => $recipient,
-                'message' => $pesan,
-                'email_subject' => ($subject_email !== '') ? $subject_email : 'default',
-                'pesan_email' => ($pesan_email !== '') ? $pesan_email : 'default',
-                'platform' => $platformdata,
-                'time' => $timedata,
-            );
-
-            $jsonData = json_encode($datapesan);
-
-            $request = Services::curlrequest();
-            $response = $request->setBody($jsonData)
-                ->setHeader('Content-Type', 'application/json')
-                ->setHeader('x-api-key', '12345678')
-                ->setHeader('App-auth', 'simlabd3tipsdku001-1')
-                ->post($url2);
-
-            return redirect()->to('simlab/peminjaman/data-peminjaman/alat-laboratorium')->with('status_icon', 'success')->with('status_text', 'Data Berhasil ditambah');
         } else {
+            $data = [
+                'title' => 'Pengajuan Peminjaman Alat Laboratorium',
+                'alatlab' => $this->alatlab->getAlatLabBaikStok(),
+                'validation' => $this->validation,
+                'activePage' => 'pengajuan-peminjaman/alat-laboratorium',
+            ];
+    
             if ($this->group->inGroup('mahasiswa', $this->auth->user()->id)) {
-                $data = [
-                    'title' => 'Pengajuan Peminjaman Alat Laboratorium',
-                    'alatlab' => $this->alatlab->getAlatLabBaikStok(),
-                    'mahasiswa' => $this->mahasiswa->getMahasiswabyUserId(),
-                    'validation' => $this->validation,
-                    'activePage' => 'pengajuan-peminjaman/alat-laboratorium',
-                ];
-                return view('simlab/peminjaman/pengajuan_peminjaman_alat', $data);
+                $data['mahasiswa'] = $this->mahasiswa->getMahasiswabyUserId();
             } else {
-                $data = [
-                    'title' => 'Pengajuan Peminjaman Alat Laboratorium',
-                    'alatlab' => $this->alatlab->getAlatLabBaikStok(),
-                    'staf' => $this->staf->getStafbyUserId(),
-                    'validation' => $this->validation,
-                    'activePage' => 'pengajuan-peminjaman/alat-laboratorium',
-                ];
-                return view('simlab/peminjaman/pengajuan_peminjaman_alat', $data);
+                $data['staf'] = $this->staf->getStafbyUserId();
             }
+    
+            return view('simlab/peminjaman/pengajuan_peminjaman_alat', $data);
         }
     }
+    
 
     public function pengajuan_peminjaman_ruang()
     {

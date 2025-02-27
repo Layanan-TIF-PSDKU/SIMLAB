@@ -24,6 +24,7 @@
           <?php if (\Config\Services::authentication()->check() === true): ?>
             <li class="nav-item cta"><a href="<?=base_url('/logout')?>" class="nav-link"><span>Logout</span></a></li>
           <?php else : ?>
+            <li class="nav-item cta"><a href="<?=base_url('/register')?>" class="nav-link"><span>Register</span></a></li>
             <li class="nav-item cta"><a href="<?=base_url('/login')?>" class="nav-link"><span>Login</span></a></li>
           <?php endif; ?>
         </ul>
