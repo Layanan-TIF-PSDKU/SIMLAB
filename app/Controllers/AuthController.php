@@ -52,13 +52,13 @@ class AuthController extends BaseController
         return redirect()->to(base_url('dashboard'));
     }
 
-    // public function register()
-    // {
-    //     $data = [
-    //         'title' => 'Halaman Registrasi | SIPEMA',
-    //     ];
-    //     return view('register', $data);
-    // }
+    public function register()
+    {
+        $data = [
+            'title' => 'Halaman Registrasi | SIPEMA',
+        ];
+        return view('register', $data);
+    }
 
     public function store()
     {
@@ -73,32 +73,41 @@ class AuthController extends BaseController
         if (!$this->validate($validationRules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
-
-        // Data user
+    
         $data = [
             'username'      => $this->request->getPost('username'),
             'email'         => $this->request->getPost('email'),
             'password_hash' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'active'        => 1, // Default user aktif
+            'active'        => 1,
         ];
-
+    
         try {
-            // Insert ke tabel users
             $this->user->insert($data);
-            $user_id = $this->user->insertID();
-
-            // Ambil group_id dari form
+            $user_id = $this->user->getInsertID(); // Ambil ID yang baru saja dimasukkan
+            
+            if (!$user_id) {
+                dd("Gagal mendapatkan ID user setelah insert");
+            }
+            
             $group_id = $this->request->getPost('group_id');
-
+            
+            if (!$group_id) {
+                dd("Group ID tidak ditemukan");
+            }
+            
             // Masukkan ke tabel auth_groups_users
             $db = \Config\Database::connect();
-            $db->table('auth_groups_users')->insert([
+            $insertGroup = $db->table('auth_groups_users')->insert([
                 'group_id' => $group_id,
                 'user_id'  => $user_id,
             ]);
-
+            
+            if (!$insertGroup) {
+                dd("Gagal insert ke auth_groups_users", $db->error());
+            }
+            
             session()->setFlashdata('message', 'Registrasi berhasil! Silakan login.');
-            // return redirect()->to(base_url('/'));
+            return redirect()->to(base_url('/'));
         } catch (DatabaseException $e) {
             return redirect()->back()->withInput()->with('errors', ['database' => $e->getMessage()]);
         }

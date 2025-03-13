@@ -30,6 +30,21 @@
             justify-content: center;
             align-items: center;
         }
+
+        .input-group {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            color: #888;
+        }
+
         
         .container {
             width: 400px;
@@ -123,7 +138,7 @@
             <p class="mt-3 fs-20 fw-small" style="color:black"><b>Registrasi Akun</b></p>
         </div>
         
-        <form method="post" action="<?= base_url('/register/store') ?>" class="login-email">
+        <form method="post" action="<?= base_url('/register') ?>" class="login-email">
             <?= csrf_field() ?>
             <?= view('Myth\\Auth\\Views\\_message_block') ?>
             
@@ -136,22 +151,24 @@
             </div>
             
             <div class="input-group">
-                <input type="password" name="password" class="form-control" placeholder="Password" required>
+                <input type="password" name="password" class="form-control password-field" placeholder="Password" required>
+                <span class="toggle-password"><i class="fa fa-eye"></i></span>
+            </div>
+
+            <div class="input-group">
+                <input type="password" name="pass_confirm" class="form-control password-field" placeholder="Konfirmasi Password" required>
+                <span class="toggle-password"><i class="fa fa-eye"></i></span>
             </div>
             
-            <div class="input-group">
-                <input type="password" name="password_confirm" class="form-control" placeholder="Konfirmasi Password" required>
-            </div>
-            
-            <div class="input-group">
+            <div class="form-group">
+                <label for="group_id">Pilih Role</label>
                 <select name="group_id" class="form-control" required>
-                    <option value="" disabled selected>Pilih Role</option>
                     <option value="1">Admin</option>
                     <option value="2">Mahasiswa</option>
                     <option value="3">Mitra</option>
-                    <option value="4">Dosen</option>
-                    <option value="5">Pimpinan</option>
-                    <option value="6">Laboran</option>
+                    <option value="3">Dosen</option>
+                    <option value="3">Pimpinan</option>
+                    <option value="3">Laboran</option>
                 </select>
             </div>
             
@@ -165,4 +182,22 @@
 </body>
 <script src="../assets/bootstrap.min.js"></script>
 <script src="../assets/simplebar.min.js"></script>
+<script>
+    document.querySelectorAll(".toggle-password").forEach(function(element) {
+        element.addEventListener("click", function() {
+            let passwordField = this.previousElementSibling;
+            let icon = this.querySelector("i");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
+        });
+    });
+</script>
 </html>

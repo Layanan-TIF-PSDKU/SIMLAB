@@ -48,6 +48,7 @@ $routes->get('tips_karir_detail/(:any)', 'LandingController::tips_karir_detail/$
 $routes->get('agenda', 'LandingController::agenda');
 $routes->get('sipema_info', 'LandingController::sipema_info');
 $routes->get('tracer_info', 'LandingController::tracer_info');
+$routes->get('register', 'AuthController::register');
 $routes->post('/register/buat', 'AuthController::store');
 
 // // Pengelolaan Data Mahasiswa
